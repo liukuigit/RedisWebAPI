@@ -1,0 +1,101 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>解压缩</h2>
+
+<form action="/Home/UnZip" method="POST">
+        <input type="submit" value="解压" />
+    </p>
+</form>
+
+<h2>压缩文件</h2>
+
+<form action="/Home/Zip" method="POST">
+    <input type="submit" value="压缩" />
+    </p>
+</form>
+
+
+<h2>专家信息解析</h2>
+<form action="/Home/JsonConvert" method="POST">
+
+    <textarea id="jsonStr" name="jsonStr" rows="10" cols="100" ></textarea>
+    <br/>
+    <select id="convertType" name="convertType">
+        <option value="专家">专家</option>
+        <option value="项目">项目</option>
+        <option value="评审">评审</option>
+        <option></option>
+        <option></option>
+
+    </select>
+    <input type="submit" value="解析" />
+    <br/>
+</form>
+
+
+<form action="/Home/WordConvert" method="POST">
+
+    <input type="submit" value="生成文档" />
+    
+</form>
+
+
+
+<form action="/Home/SyncData" method="POST">
+
+
+
+    <input type="button" value="提交" id="btnSubmit" />
+
+    <script type="text/javascript">
+
+
+        $("#btnSubmit").bind("click", syncData);
+
+        function syncData() {
+
+            var jobj = {ID:1,Name:'刘奎',GroupName:'事业部'};
+            //jobj["ID"] = 1;
+            //jobj["Name"] = "刘奎";
+            //jobj["GroupName"] = "事业部";
+            //jobj["groups[0].ID"] = 1;
+            //jobj["groups[0].Name"] = "事业部1";
+            //jobj["groups[1].ID"] = 2;
+            //jobj["groups[1].Name"] = "事业部2";
+
+            var array = new Array();
+            //var obj1 = { ID: 1, Name: '名称1' };
+
+            var obj2 = { ID: 2, Name: '名称2' };
+            var obj1 = {};
+            obj1.ID = 1;
+            obj1.Name = 'aaa';
+            array[0]=obj1;
+            array[1]=obj2;
+            jobj["groups"] = array;
+           
+            $.ajax({
+                url: "/Home/SyncData",
+                type: "POST",
+                dataType: "json",
+                data: { obj: jobj, group: array },
+                success: function (returnData, status, XMLHttpRequest) {
+                    // 			    resolveResultBeanIsOk(returnData,status);
+                    alert(status);
+                }
+            });
+
+        }
+
+    </script>
+
+
+</form>
+
+
+
+
+
+
+

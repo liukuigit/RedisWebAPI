@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form action="/Cache/AddKey" method="POST">
+
+    <input type="text" value="" id="key" name="key" />&nbsp;&nbsp;
+    <input type="text" value="" id="val" name="val" />&nbsp;&nbsp;
+
+    <input type="text" value="2" id="addType" name="addType" />&nbsp;&nbsp;
+
+    <input type="text" value="20000" id="ticks" name="ticks" />&nbsp;&nbsp;
+
+    <input type="submit" value="添加" />
+    &nbsp;&nbsp;
+    <input type="submit" value="异步写入" />
+
+</form>
+<br/>
+<form action="/Cache/GetKey" method="POST">
+    <input type="text" value="" id="key" name="key" />&nbsp;&nbsp;
+
+    <input type="submit" value="获取" />
+</form>
+<br/>
+<form action="/Cache/SyncAddKey" method="POST">
+
+    <input type="text" value="" id="key" name="key" />&nbsp;&nbsp;
+    <input type="text" value="" id="val" name="val" />&nbsp;&nbsp;
+
+    <input type="text" value="2" id="addType" name="addType" />&nbsp;&nbsp;
+
+    <input type="text" value="20000" id="ticks" name="ticks" />&nbsp;&nbsp;
+
+    &nbsp;&nbsp;
+    <input type="submit" value="异步写入" />
+
+</form>
+<br />
+<form action="/Cache/SyncAddKeyObj" method="POST">
+
+    <input type="text" value="" id="key" name="key" />&nbsp;&nbsp;
+
+    <input type="submit" value="写入对象" />
+ 
+</form>
