@@ -67,9 +67,43 @@ namespace BQ_WEBAPI.Controllers
         public ActionResult SyncAddKeyObj(string key)
         {
             List<GroupEntity> list = GetGroupList();
-           _cacheHelper.InsertAsync(key, list);
+            //_cacheHelper.InsertAsync(key, list);
 
-           return RedirectToAction("Index");
+            RedisListCache cache = new RedisListCache();
+            RedisHashCache hashCache = new RedisHashCache(0);
+
+            foreach (GroupEntity m in list)
+            {
+
+                cache.ListLeftPush(key, m);
+
+                cache.ListRightPushAsync(key + "Async", m);
+
+                hashCache.HashSet(key + "Hash", m.ID.ToString(), m);
+
+                hashCache.HashSetAsync(key + "HashAsync", m.ID.ToString(), m);
+
+            }
+            return RedirectToAction("Index");
+        }
+
+        public JsonResult GetObjList(string key)
+        {
+            RedisListCache cache = new RedisListCache();
+            RedisHashCache hashCache = new RedisHashCache(0);
+
+            //List<GroupEntity> list = cache.ListRange<GroupEntity>(key);
+
+            GroupEntity m = cache.ListLeftPop<GroupEntity>(key);
+
+            GroupEntity m1 = hashCache.HashGet<GroupEntity>(key+"Hash", "50");
+
+            List<GroupEntity> list = new List<GroupEntity>();
+            list.Add(m);
+            list.Add(m1);
+
+            return Json(list);
+
         }
 
         public JsonResult GetKey(string key)
@@ -85,25 +119,18 @@ namespace BQ_WEBAPI.Controllers
         {
             List<GroupEntity> groupList = new List<GroupEntity>();
 
-
-            groupList.Add(new GroupEntity()
+            for (int i = 0; i < 2000; i++)
             {
-                ID = 1,
-                Name = "坦克评审组1"
+                groupList.Add(new GroupEntity()
+                {
+                    ID = i,
+                    Name = "坦克评审组" + i
 
-            });
+                });
+            }
 
-            groupList.Add(new GroupEntity()
-            {
-                ID = 2,
-                Name = "坦克评审组2"
 
-            });
-            groupList.Add(new GroupEntity()
-            {
-                ID = 3,
-                Name = "坦克评审组3",
-            });
+
             return groupList;
         }
 

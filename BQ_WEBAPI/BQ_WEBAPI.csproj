@@ -157,7 +157,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BqApiController.cs" />
     <Compile Include="Controllers\CacheController.cs" />
+    <Compile Include="Controllers\HashCacheController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ListCacheController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -257,6 +259,8 @@
     <Content Include="Uploads\Contract\aaa.docx" />
     <Content Include="Uploads\Contract\前台业务委托合同（Final 20180228）.doc" />
     <Content Include="Views\Cache\Index.cshtml" />
+    <Content Include="Views\ListCache\Index.cshtml" />
+    <Content Include="Views\HashCache\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

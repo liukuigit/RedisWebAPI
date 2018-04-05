@@ -38,7 +38,7 @@ namespace BQ.CacheStrategy.Redis
 
         public RedisCacheStrategy()
         {
-            _cache = new RedisBase(1);
+            _cache = new RedisBase(0);
 
         }
 

@@ -12,7 +12,7 @@ namespace BQ.CacheStrategy.Redis
         private RedisBase redis = null;
         public DoRedisStringCache()
         {
-            redis = new RedisBase(1);
+            redis = new RedisBase(0);
         }
 
         #region 同步执行

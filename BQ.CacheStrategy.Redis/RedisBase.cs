@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BQ.CacheStrategy.Redis
 {
-    public class RedisBase : IConfigMapper
+    public class RedisBase 
     {
         private static ConnectionMultiplexer db = null;
         private static string key = null;
@@ -38,6 +38,7 @@ namespace BQ.CacheStrategy.Redis
         {
             var fixkey = key ?? config.PrefixKey;
             return fixkey + old;
+              
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace BQ.CacheStrategy.Redis
         /// <param name="func"></param>
         /// <returns></returns>
         public T Invoke<T>(Func<IDatabase, T> func)
-        {
+        { 
             return func(db.GetDatabase(DbNumber));
         }
         public string ConvertJson<T>(T val)
